@@ -3,6 +3,6 @@ window:0:567:0:1008
 height:567
 width:1008
 Ia:0.8
-background:0.133:0.133:0.133
+background:1:1:1
 anti:50
 mirror:5
