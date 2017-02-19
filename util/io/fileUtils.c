@@ -6,6 +6,7 @@
 #include "../math/mathUtils.h"
 #include "../../scene/object/light.h"
 #include "../../scene/object/sphere.h"
+#include "../../scene/object/cone.h"
 
 
 objectNode* readObjectsFromFile(char *fileName) {
@@ -185,9 +186,9 @@ objectNode* readObjectsFromFile(char *fileName) {
                     case 1:
                         objects = addSphereO(type,center,radius,color,amb, ks, kn, o1, o2, cantCortes, vertices, nCorte, objects);
                         break;
-//                    case 2:
-//                        addConeO(type, center, Q, start, p, color, amb, ks, kn, o1, o2);
-//                        break;
+                    case 2:
+                        objects = addConeO(type, center, Q, start, p, color, amb, ks, kn, o1, o2, objects);
+                        break;
 //                    case 3:
 //                        addDiscO(type, center, N, radius, radius2, color, amb, ks, kn, o1, o2);
 //                        break;
