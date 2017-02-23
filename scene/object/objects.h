@@ -15,7 +15,7 @@ typedef struct object {
     int kn;
     int texture;
     void *info;
-    rgb* color;
+    rgb color;
     long double ambient;
     long double ks;
     long double o1;
@@ -28,9 +28,7 @@ typedef struct object {
 } objectNode;
 
 
-
-
 objectNode * addObject(objectNode *newObject, objectNode *objects);
-void createObject(objectNode *newObject, rgb *newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2);
+void createObject(objectNode *newObject, rgb newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2);
 
 #endif

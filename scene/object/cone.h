@@ -9,8 +9,8 @@
 #include "objects.h"
 
 typedef struct cone{
-    vector* center;
-    vector* Q;
+    vector center;
+    vector Q;
     long double start, end;
     long double u, v;
     long double prop;

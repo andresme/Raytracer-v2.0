@@ -89,13 +89,12 @@ int main (int argc, char **argv) {
     while(current != NULL) {
         objectNode *temp = current;
         current = current->next;
-        temp->deleteObject(temp->info);
+        free(temp);
     }
     lightNode *currentL = lights;
     while(currentL != NULL) {
         lightNode *temp = currentL;
         currentL = currentL->next;
-        free(temp->color);
         free(temp);
     }
     writeTofile(picture, outputFileName, pictureSettings->width, pictureSettings->height);

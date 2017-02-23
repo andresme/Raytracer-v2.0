@@ -8,8 +8,8 @@
 #include "objects.h"
 
 typedef struct cylinder{
-    vector* center;
-    vector* Q, *G;
+    vector center;
+    vector Q, G;
     long double start, end;
     long double r;
     long double r2;

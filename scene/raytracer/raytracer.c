@@ -202,9 +202,9 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
                     R.z = (N.z * 2 * product) - L.z;
                     E = E + (expTo(productoPunto(R,nXd), firstIntersection.object->kn) * factAtt
                              * k->intensity) * firstIntersection.object->ks;
-                    lightsColor.r += k->color->r * min(1, I);
-                    lightsColor.g += k->color->g * min(1, I);
-                    lightsColor.b += k->color->b * min(1, I);
+                    lightsColor.r += k->color.r * min(1, I);
+                    lightsColor.g += k->color.g * min(1, I);
+                    lightsColor.b += k->color.b * min(1, I);
                 }
             }
             lightCount++;
@@ -217,7 +217,7 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
         I = I + ia * firstIntersection.object->ambient;
         I = min(1, I);
         E = min(1, E);
-        if(firstIntersection.object && firstIntersection.object->texture > 0){
+        if(firstIntersection.object != NULL && firstIntersection.object->texture > 0){
             color = firstIntersection.object->getTexture(firstIntersection.object->texture, firstIntersection.t,
                                                               a, b, firstIntersection.object);
             color.r = I * color.r;
@@ -225,9 +225,9 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
             color.b = I * color.b;
         }
         else{
-            color.r = I * (firstIntersection.object->color->r + lightsColor.r)/2;
-            color.g = I * (firstIntersection.object->color->g + lightsColor.g)/2;
-            color.b = I * (firstIntersection.object->color->b + lightsColor.b)/2;
+            color.r = I * (firstIntersection.object->color.r + lightsColor.r)/2;
+            color.g = I * (firstIntersection.object->color.g + lightsColor.g)/2;
+            color.b = I * (firstIntersection.object->color.b + lightsColor.b)/2;
         }
         if(E>0){
             color.r = color.r + E*(1-color.r);

@@ -3,7 +3,7 @@
 
 #include "../struct/sharedStructs.h"
 
-#define DELTA 0.0005
+#define DELTA 0.00001
 
 #define SWAP(x) ( ((x) << 24) | \
          (((x) << 8) & 0x00ff0000) | \

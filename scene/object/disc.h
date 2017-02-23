@@ -5,8 +5,8 @@
 #include "objects.h"
 
 typedef struct disc{
-    vector *center;
-    vector *N;
+    vector center;
+    vector N;
     long double r, r2, A, B, C, D;
 } disc;
 

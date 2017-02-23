@@ -3,11 +3,11 @@
 
 sphere* createSphere(long double center[], long double radius/*, int cantCortes, plane* cortes*/){
     sphere *newSphere = (sphere *)malloc(sizeof(sphere));
-    vector *centerS = (vector *)malloc(sizeof(vector));
+    vector centerS = {0, 0, 0};
 
-    centerS->y = center[0];
-    centerS->x = center[1];
-    centerS->z = center[2];
+    centerS.y = center[0];
+    centerS.x = center[1];
+    centerS.z = center[2];
 
     newSphere->center = centerS;
     newSphere->radius = radius;
@@ -20,7 +20,6 @@ sphere* createSphere(long double center[], long double radius/*, int cantCortes,
 
 void freeSphere(struct object *this){
     sphere *thisSphere = (sphere *) this;
-    free(thisSphere->center);
     free(thisSphere);
 }
 
@@ -33,9 +32,9 @@ intersectionNode getIntersectionSphere(vector dir, vector anchor, struct object 
     long double B, Y, D;
     long double t1, t2;
 
-    Xc = object->center->x;
-    Yc = object->center->y;
-    Zc = object->center->z;
+    Xc = object->center.x;
+    Yc = object->center.y;
+    Zc = object->center.z;
 
     Xa = anchor.x;
     Ya = anchor.y;
@@ -87,9 +86,9 @@ vector getNormalSphere(vector eye, vector dir, long double t, objectNode *this){
 
     radius = object->radius;
 
-    normalizedVector.x = Xi - object->center->x;
-    normalizedVector.y = Yi - object->center->y;
-    normalizedVector.z = Zi - object->center->z;
+    normalizedVector.x = Xi - object->center.x;
+    normalizedVector.y = Yi - object->center.y;
+    normalizedVector.z = Zi - object->center.z;
 
     normalizedVector.x = (normalizedVector.x)/radius;
     normalizedVector.y = (normalizedVector.y)/radius;
@@ -102,7 +101,7 @@ objectNode* addSphereO(int type, long double center[], long double radius, long 
                 int kn, long double o1, long double o2, int cantCortes, vector* cortes, vector* nCortes, objectNode *objects){
     objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
 
-    rgb* newColor = (rgb*)malloc(sizeof(rgb));
+    rgb newColor = {0, 0, 0};
     sphere *newSphere;
     //plane* planosCorte;
 

@@ -6,7 +6,7 @@
 objectNode* addCylinderO(int type, long double center[], long double N[],long double G[], long double start[], long double r,
                          long double color[], long double amb, long double ks, int kn, long double o1, long double o2, int style, objectNode *objects){
     objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
-    rgb* newColor = (rgb*)malloc(sizeof(rgb));
+    rgb newColor = {0, 0, 0};
     cylinder *newCylinder;
 
     createObject(newObject, newColor, type, color, amb, ks, kn, o1, o2);
@@ -23,23 +23,23 @@ objectNode* addCylinderO(int type, long double center[], long double N[],long do
 
 cylinder* createCylinder(long double center[], long double vectorQ[], long double start[], long double r, long double vectorG[]){
     cylinder *newCylinder = (cylinder *)malloc(sizeof(cylinder));
-    vector *newCenter = (vector *)malloc(sizeof(vector));
-    vector *newVectorQ = (vector *)malloc(sizeof(vector));
-    vector *newVectorG = (vector *)malloc(sizeof(vector));
+    vector newCenter = {0, 0, 0};
+    vector newVectorQ = {0, 0, 0};
+    vector newVectorG = {0, 0, 0};
 
-    newCenter->x = center[0];
-    newCenter->y = center[1];
-    newCenter->z = center[2];
+    newCenter.x = center[0];
+    newCenter.y = center[1];
+    newCenter.z = center[2];
     newCylinder->center = newCenter;
 
-    newVectorQ->x = vectorQ[0];
-    newVectorQ->y = vectorQ[1];
-    newVectorQ->z = vectorQ[2];
+    newVectorQ.x = vectorQ[0];
+    newVectorQ.y = vectorQ[1];
+    newVectorQ.z = vectorQ[2];
     newCylinder->Q = newVectorQ;
 
-    newVectorG->x = vectorG[0];
-    newVectorG->y = vectorG[1];
-    newVectorG->z = vectorG[2];
+    newVectorG.x = vectorG[0];
+    newVectorG.y = vectorG[1];
+    newVectorG.z = vectorG[2];
     newCylinder->G = newVectorG;
 
     newCylinder->start = start[0];
@@ -52,9 +52,6 @@ cylinder* createCylinder(long double center[], long double vectorQ[], long doubl
 
 void freeCylinder(struct object *this){
     cylinder *obj = (cylinder *) this;
-    free(obj->Q);
-    free(obj->center);
-    free(obj->G);
     free(obj);
 }
 
@@ -67,13 +64,13 @@ vector getNormalCylinder(vector eye, vector dir, long double t, objectNode *this
     yi = eye.y + (t * dir.y);
     zi = eye.z + (t * dir.z);
 
-    x0 = obj->center->x;
-    y0 = obj->center->y;
-    z0 = obj->center->z;
+    x0 = obj->center.x;
+    y0 = obj->center.y;
+    z0 = obj->center.z;
 
-    xq = obj->Q->x;
-    yq = obj->Q->y;
-    zq = obj->Q->z;
+    xq = obj->Q.x;
+    yq = obj->Q.y;
+    zq = obj->Q.z;
 
     d = ((xi-x0)*xq)+((yi-y0)*yq)+((zi-z0)*zq);
 
@@ -94,15 +91,15 @@ intersectionNode getIntersectionCylinder(vector dir, vector anchor, objectNode *
     long double B, Y, D, A;
     long double t1, t2;
 
-    Xc = this->center->x;
-    Yc = this->center->y;
-    Zc = this->center->z;
+    Xc = this->center.x;
+    Yc = this->center.y;
+    Zc = this->center.z;
 
     r = this->r2;
 
-    Xq = this->Q->x;
-    Yq = this->Q->y;
-    Zq = this->Q->z;
+    Xq = this->Q.x;
+    Yq = this->Q.y;
+    Zq = this->Q.z;
 
     Xa = anchor.x;
     Ya = anchor.y;
@@ -142,14 +139,14 @@ intersectionNode getIntersectionCylinder(vector dir, vector anchor, objectNode *
     else if(D > 0){
         t1 = ((-1 * B) + sqrt(D))/(2 * A);
         t2 = ((-1 * B) - sqrt(D))/(2 * A);
-        if(t1 < t2 && t1 > 0.0005){
+        if(t1 < t2 && t1 > DELTA){
 
             Vx = Xa + t1*Xd;
             Vy = Ya + t1*Yd;
             Vz = Za + t1*Zd;
-            d = (Vx-this->center->x)*this->Q->x +
-                (Vy-this->center->y)*this->Q->y +
-                (Vz-this->center->z)*this->Q->z;
+            d = (Vx-this->center.x)*this->Q.x +
+                (Vy-this->center.y)*this->Q.y +
+                (Vz-this->center.z)*this->Q.z;
             if(this->end == -1.0f || (d < this->end && d > this->start)){
                 intersec.object = object;
                 intersec.t = t1;
@@ -158,9 +155,9 @@ intersectionNode getIntersectionCylinder(vector dir, vector anchor, objectNode *
                 Vx = Xa + t2*Xd;
                 Vy = Ya + t2*Yd;
                 Vz = Za + t2*Zd;
-                d = (Vx-this->center->x)*this->Q->x +
-                    (Vy-this->center->y)*this->Q->y +
-                    (Vz-this->center->z)*this->Q->z;
+                d = (Vx-this->center.x)*this->Q.x +
+                    (Vy-this->center.y)*this->Q.y +
+                    (Vz-this->center.z)*this->Q.z;
                 if(d < this->end && d > this->start){
                     intersec.object = object;
                     intersec.t = t2;
@@ -171,9 +168,9 @@ intersectionNode getIntersectionCylinder(vector dir, vector anchor, objectNode *
             Vx = Xa + t2*Xd;
             Vy = Ya + t2*Yd;
             Vz = Za + t2*Zd;
-            d = (Vx-this->center->x)*this->Q->x +
-                (Vy-this->center->y)*this->Q->y +
-                (Vz-this->center->z)*this->Q->z;
+            d = (Vx-this->center.x)*this->Q.x +
+                (Vy-this->center.y)*this->Q.y +
+                (Vz-this->center.z)*this->Q.z;
             if(this->end == -1.0f || (d < this->end && d > this->start)){
                 intersec.object = object;
                 intersec.t = t2;
@@ -182,9 +179,9 @@ intersectionNode getIntersectionCylinder(vector dir, vector anchor, objectNode *
                 Vx = Xa + t1*Xd;
                 Vy = Ya + t1*Yd;
                 Vz = Za + t1*Zd;
-                d = (Vx-this->center->x)*this->Q->x +
-                    (Vy-this->center->y)*this->Q->y +
-                    (Vz-this->center->z)*this->Q->z;
+                d = (Vx-this->center.x)*this->Q.x +
+                    (Vy-this->center.y)*this->Q.y +
+                    (Vz-this->center.z)*this->Q.z;
                 if(this->end == -1.0f || (d < this->end && d > this->start)){
                     intersec.object = object;
                     intersec.t = t1;
@@ -202,7 +199,7 @@ rgb getTextureCylinder(int style, long double t, vector dir, vector anchor, obje
     long double v, u, d, Vx, Vy, Vz;
     cylinder *this = (cylinder *) object->info;
     N = getNormalCylinder(anchor,dir,t,object);
-    vector G = {this->G->x, this->G->y, this->G->z};
+    vector G = {this->G.x, this->G.y, this->G.z};
     u = productoPunto(N,G);
     u = acos(u);
 
@@ -211,7 +208,7 @@ rgb getTextureCylinder(int style, long double t, vector dir, vector anchor, obje
     Vy = anchor.y + t*dir.y;
     Vz = anchor.z + t*dir.z;
 
-    d = (Vx-this->center->x)*this->Q->x + (Vy-this->center->y)*this->Q->y +(Vz-this->center->z)*this->Q->z;
+    d = (Vx-this->center.x)*this->Q.x + (Vy-this->center.y)*this->Q.y +(Vz-this->center.z)*this->Q.z;
     v = (d - this->start)/(this->end-this->start);
 
     return texel;

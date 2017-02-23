@@ -10,17 +10,17 @@
 
 cone* createCone(long double center[], long double vectorQ[], long double start[], long double p[]){
     cone *newCone = (cone *)malloc(sizeof(cone));
-    vector *newCenter = (vector *)malloc(sizeof(vector));
-    vector *newVectorQ = (vector *)malloc(sizeof(vector));
+    vector newCenter = {0, 0, 0};
+    vector newVectorQ = {0, 0, 0};
 
-    newCenter->x = center[0];
-    newCenter->y = center[1];
-    newCenter->z = center[2];
+    newCenter.x = center[0];
+    newCenter.y = center[1];
+    newCenter.z = center[2];
     newCone->center = newCenter;
 
-    newVectorQ->x = vectorQ[0];
-    newVectorQ->y = vectorQ[1];
-    newVectorQ->z = vectorQ[2];
+    newVectorQ.x = vectorQ[0];
+    newVectorQ.y = vectorQ[1];
+    newVectorQ.z = vectorQ[2];
     newCone->Q = newVectorQ;
 
     newCone->start = start[0];
@@ -43,13 +43,13 @@ vector getNormalCone(vector eye, vector dir, long double t, objectNode *this){
     yi = eye.y + (t * dir.y);
     zi = eye.z + (t * dir.z);
 
-    x0 = obj->center->x;
-    y0 = obj->center->y;
-    z0 = obj->center->z;
+    x0 = obj->center.x;
+    y0 = obj->center.y;
+    z0 = obj->center.z;
 
-    xq = obj->Q->x;
-    yq = obj->Q->y;
-    zq = obj->Q->z;
+    xq = obj->Q.x;
+    yq = obj->Q.y;
+    zq = obj->Q.z;
 
     xl = xi-x0;
     yl = yi-y0;
@@ -86,13 +86,13 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
     long double B, Y, D, A;
     long double t1, t2;
 
-    Xc = this->center->x;
-    Yc = this->center->y;
-    Zc = this->center->z;
+    Xc = this->center.x;
+    Yc = this->center.y;
+    Zc = this->center.z;
 
-    Xq = this->Q->x;
-    Yq = this->Q->y;
-    Zq = this->Q->z;
+    Xq = this->Q.x;
+    Yq = this->Q.y;
+    Zq = this->Q.z;
 
     Xa = anchor.x;
     Ya = anchor.y;
@@ -141,9 +141,9 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
             Vx =  Xa + t1*Xd;
             Vy =  Ya + t1*Yd;
             Vz =  Za + t1*Zd;
-            d = (Vx-this->center->x)*this->Q->x +
-                (Vy-this->center->y)*this->Q->y +
-                (Vz-this->center->z)*this->Q->z;
+            d = (Vx-this->center.x)*this->Q.x +
+                (Vy-this->center.y)*this->Q.y +
+                (Vz-this->center.z)*this->Q.z;
             if(d < this->end && d > this->start){
                 intersec.object = object;
                 intersec.t = t1;
@@ -152,9 +152,9 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
                 Vx =  Xa + t2*Xd;
                 Vy =  Ya + t2*Yd;
                 Vz =  Za + t2*Zd;
-                d = (Vx-this->center->x)*this->Q->x +
-                    (Vy-this->center->y)*this->Q->y +
-                    (Vz-this->center->z)*this->Q->z;
+                d = (Vx-this->center.x)*this->Q.x +
+                    (Vy-this->center.y)*this->Q.y +
+                    (Vz-this->center.z)*this->Q.z;
                 if(d < this->end && d > this->start){
                     intersec.object = object;
                     intersec.t = t2;
@@ -166,9 +166,9 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
             Vx =  Xa + t2*Xd;
             Vy =  Ya + t2*Yd;
             Vz =  Za + t2*Zd;
-            d = (Vx-this->center->x)*this->Q->x +
-                (Vy-this->center->y)*this->Q->y +
-                (Vz-this->center->z)*this->Q->z;
+            d = (Vx-this->center.x)*this->Q.x +
+                (Vy-this->center.y)*this->Q.y +
+                (Vz-this->center.z)*this->Q.z;
             if(d < this->end && d > this->start){
                 intersec.object = object;
                 intersec.t = t2;
@@ -177,9 +177,9 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
                 Vx =  Xa + t1*Xd;
                 Vy =  Ya + t1*Yd;
                 Vz =  Za + t1*Zd;
-                d = (Vx-this->center->x)*this->Q->x +
-                    (Vy-this->center->y)*this->Q->y +
-                    (Vz-this->center->z)*this->Q->z;
+                d = (Vx-this->center.x)*this->Q.x +
+                    (Vy-this->center.y)*this->Q.y +
+                    (Vz-this->center.z)*this->Q.z;
                 if(d < this->end && d > this->start){
                     intersec.object = object;
                     intersec.t = t1;
@@ -192,15 +192,13 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
 
 void freeCone(struct object *this) {
     cone *thisCone = (cone *) this;
-    free(thisCone->center);
-    free(thisCone->Q);
     free(thisCone);
 }
 
 objectNode* addConeO(int type, long double center[], long double vectorQ[], long double start[], long double p[], long double color[],
               long double amb, long double ks, int kn, long double o1, long double o2, objectNode *objects){
     objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
-    rgb* newColor = (rgb*)malloc(sizeof(rgb));
+    rgb newColor = {0, 0, 0};
     cone *newCone;
 
     createObject(newObject, newColor, type, color, amb, ks, kn, o1, o2);

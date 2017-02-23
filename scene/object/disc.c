@@ -8,7 +8,7 @@ objectNode* addDiscO(int type, long double center[], long double N[], long doubl
                      long double amb, long double ks, int kn, long double o1, long double o2, objectNode *objects){
 
     objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
-    rgb* newColor = (rgb*)malloc(sizeof(rgb));
+    rgb newColor = {0, 0, 0};
     disc *newDisc;
 
     createObject(newObject, newColor, type, color, amb, ks, kn, o1, o2);
@@ -23,13 +23,13 @@ objectNode* addDiscO(int type, long double center[], long double N[], long doubl
 
 disc* createDisc(long double center[], long double N[], long double r, long double r2){
     disc *newDisc = (disc *) malloc(sizeof(disc));
-    vector *newCenter = (vector *) malloc(sizeof(vector));
-    vector *newNormal = (vector *) malloc(sizeof(vector));
+    vector newCenter = {0, 0, 0};
+    vector newNormal = {0, 0, 0};
     long double temp;
 
-    newCenter->x = center[0];
-    newCenter->y = center[1];
-    newCenter->z = center[2];
+    newCenter.x = center[0];
+    newCenter.y = center[1];
+    newCenter.z = center[2];
     newDisc->center = newCenter;
     newDisc->A = N[0];
     newDisc->B = N[1];
@@ -38,9 +38,9 @@ disc* createDisc(long double center[], long double N[], long double r, long doub
 
     temp = sqrt((double) (pow2(newDisc->A) + pow2(newDisc->B) + pow2(newDisc->C)));
 
-    newNormal->x = N[0]/temp;
-    newNormal->y = N[1]/temp;
-    newNormal->z = N[2]/temp;
+    newNormal.x = N[0]/temp;
+    newNormal.y = N[1]/temp;
+    newNormal.z = N[2]/temp;
     newDisc->N = newNormal;
 
     newDisc->r = r * r;
@@ -51,8 +51,6 @@ disc* createDisc(long double center[], long double N[], long double r, long doub
 
 void freeDisc(struct object *this){
     disc* object = (disc *) this;
-    free(object->center);
-    free(object->N);
     free(object);
 }
 
@@ -61,9 +59,9 @@ vector getNormalDisc(vector eye, vector dir, long double t, objectNode *this){
     vector N = {0, 0, 0};
     long double a,b,c;
 
-    a = obj->N->x;
-    b = obj->N->y;
-    c = obj->N->z;
+    a = obj->N.x;
+    b = obj->N.y;
+    c = obj->N.z;
 
     N.x = a;
     N.y = b;
@@ -88,19 +86,19 @@ intersectionNode getIntersectionDisc(vector dir, vector anchor, objectNode *obje
 
     F = A*Xd+B*Yd+C*Zd;
 
-    if(F < 0.0005 && F > -0.0005)
+    if(F < DELTA && F > -DELTA)
         return intersec;
 
     E = A*anchor.x+B*anchor.y+C*anchor.z+D;
     t = -E/F;
 
-    if(t < 0.0005) return intersec;
+    if(t < DELTA) return intersec;
 
     Xi = anchor.x + (t * dir.x);
     Yi = anchor.y + (t * dir.y);
     Zi = anchor.z + (t * dir.z);
 
-    temp = pow2((this->center->x)-Xi) + pow2((this->center->y)-Yi) + pow2((this->center->z)-Zi);
+    temp = pow2((this->center.x)-Xi) + pow2((this->center.y)-Yi) + pow2((this->center.z)-Zi);
 
     if(this->r > temp && this->r2 < temp){
         intersec.object = object;

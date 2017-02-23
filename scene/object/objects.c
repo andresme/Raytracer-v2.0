@@ -1,10 +1,10 @@
 #include "objects.h"
 #include <stdlib.h>
 
-void createObject(objectNode *newObject, rgb *newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2){
-    newColor->r = color[0];
-    newColor->g = color[1];
-    newColor->b = color[2];
+void createObject(objectNode *newObject, rgb newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2){
+    newColor.r = color[0];
+    newColor.g = color[1];
+    newColor.b = color[2];
 
     newObject->type = type;
     newObject->color = newColor;

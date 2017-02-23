@@ -11,7 +11,7 @@ typedef struct light {
     vector center;
     long double intensity;
     long double c[3];
-    rgb* color;
+    rgb color;
     struct light *next;
 } lightNode;
 
