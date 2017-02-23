@@ -23,13 +23,13 @@ o2:0.5
 add:
 
 sphere:
-radius:1500
+radius:1000
 color:0.8:0.8:0.8
 cantCortes:0
 center:1500:800.0:7000.0
-amb:0.95
-ks:0.0
-kn:0.0
+amb:0.4
+ks:0.03
+kn:300
 o1:0.5
 o2:0.5
 add:
@@ -37,7 +37,7 @@ add:
 cone:
 center:400:200.0:2000.0
 prop:10:25
-Q:0.3762:0.5787:0.7234
+Q:-1:0:0
 start:0:550
 color:0.304:0.764:0.150
 amb:0.8
@@ -47,3 +47,27 @@ o1:1.0
 o2:0.0
 add:
 
+cylinder:
+center:250:850:1500
+radius:155
+Q:0.3762:0.5787:0.7234
+start:0:300
+color:0.604:0.364:0.950
+amb:0.9
+ks:0.030
+kn:150
+add:
+
+
+disc:
+center:150:350:1500
+N:0.3762:0.5787:0.7234
+color:0.80:0.7:0.9
+radius:175
+radius2:80
+amb:0.8
+ks:0.08
+kn:500
+o1:0.3
+o2:0.7
+add:

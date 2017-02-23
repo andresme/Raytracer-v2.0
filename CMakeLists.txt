@@ -15,7 +15,7 @@ set(SOURCE_FILES
         util/math/mathUtils.c
         util/math/mathUtils.h
         util/struct/sharedStructs.h
-        main.c scene/object/light.c scene/object/light.h scene/object/objects.c scene/object/cone.c scene/object/cone.h)
+        main.c scene/object/light.c scene/object/light.h scene/object/objects.c scene/object/cone.c scene/object/cone.h scene/object/disc.c scene/object/disc.h scene/object/cylinder.c scene/object/cylinder.h)
 
 add_executable(rt2 ${SOURCE_FILES})
 

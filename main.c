@@ -105,7 +105,7 @@ int main (int argc, char **argv) {
     free(picture);
     free(pictureSettings);
 
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    double time_spent = ((double)(end - begin) / CLOCKS_PER_SEC) / threadNumber;
     printf("time raytracing: %lf seconds.\n", time_spent);
     return 0;
 }

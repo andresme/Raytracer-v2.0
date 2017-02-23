@@ -7,6 +7,8 @@
 #include "../../scene/object/light.h"
 #include "../../scene/object/sphere.h"
 #include "../../scene/object/cone.h"
+#include "../../scene/object/disc.h"
+#include "../../scene/object/cylinder.h"
 
 
 objectNode* readObjectsFromFile(char *fileName) {
@@ -189,12 +191,12 @@ objectNode* readObjectsFromFile(char *fileName) {
                     case 2:
                         objects = addConeO(type, center, Q, start, p, color, amb, ks, kn, o1, o2, objects);
                         break;
-//                    case 3:
-//                        addDiscO(type, center, N, radius, radius2, color, amb, ks, kn, o1, o2);
-//                        break;
-//                    case 4:
-//                        addCylinderO(type, center, Q, G, start, radius, color, amb, ks, kn, o1, o2, style);
-//                        break;
+                    case 3:
+                        objects = addDiscO(type, center, N, radius, radius2, color, amb, ks, kn, o1, o2, objects);
+                        break;
+                    case 4:
+                        objects = addCylinderO(type, center, Q, G, start, radius, color, amb, ks, kn, o1, o2, style, objects);
+                        break;
 //                    case 5:
 //                        addPolygonO(type, vertices, cantVertex, color, amb, ks, kn, o1, o2, style, imag);
 //                        break;
