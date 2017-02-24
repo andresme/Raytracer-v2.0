@@ -1,4 +1,5 @@
 #include "objects.h"
+#include "polygon.h"
 #include <stdlib.h>
 
 void createObject(objectNode *newObject, rgb newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2){
@@ -30,4 +31,13 @@ objectNode* addObject(objectNode *newObject, objectNode *objects){
 
     }
     return objects;
+}
+
+plane* calcPlanosDeCorte(int cantVec, vector* puntos, vector* normales){
+    plane* planoDeCorte = (plane*) malloc(cantVec*sizeof(plane));
+    int contador;
+
+    for(contador = 0; contador < cantVec; contador++)
+        planoDeCorte[contador] = createPlane0(puntos[contador], normales[contador]);
+    return planoDeCorte;
 }

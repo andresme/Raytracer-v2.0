@@ -50,7 +50,7 @@ disc* createDisc(long double center[], long double N[], long double r, long doub
 }
 
 void freeDisc(struct object *this){
-    disc* object = (disc *) this;
+    disc* object = (disc *) this->info;
     free(object);
 }
 

@@ -51,7 +51,7 @@ cylinder* createCylinder(long double center[], long double vectorQ[], long doubl
 }
 
 void freeCylinder(struct object *this){
-    cylinder *obj = (cylinder *) this;
+    cylinder *obj = (cylinder *) this->info;
     free(obj);
 }
 

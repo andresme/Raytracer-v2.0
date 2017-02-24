@@ -9,6 +9,7 @@
 #include "../../scene/object/cone.h"
 #include "../../scene/object/disc.h"
 #include "../../scene/object/cylinder.h"
+#include "../../scene/object/polygon.h"
 
 
 objectNode* readObjectsFromFile(char *fileName) {
@@ -16,8 +17,8 @@ objectNode* readObjectsFromFile(char *fileName) {
     long double radius,amb,ks,color[3],center[3],Q[3],p[2],start[2], N[3], f1[3], f2[3], radius2, G[3];
     long double matriz[10];
     long double K, o1, o2;
-    char info[40], *attrib, imag[1];
-    int contador,type, kn, cantVertex, cantCortes, style;
+    char info[40], *attrib, *imag;
+    int contador = 0,type = 0, kn = 0, cantVertex = 0, cantCortes = 0, style = 0;
 
     FILE* fileptr = fopen(fileName, "rt");
 
@@ -76,7 +77,9 @@ objectNode* readObjectsFromFile(char *fileName) {
             }
             else if(!strcmp(attrib, "texFile")){
                 attrib = strtok(NULL, ":");
-                sscanf(attrib, "%s", &imag[0]);
+                imag = (char *) malloc(strlen(attrib)*sizeof(char));
+                strcpy(imag, attrib);
+                imag[strlen(attrib)-1] = '\0';
             }
             else if(!strcmp(attrib, "G")){
                 for(contador = 0; contador < 3; contador++){
@@ -197,9 +200,9 @@ objectNode* readObjectsFromFile(char *fileName) {
                     case 4:
                         objects = addCylinderO(type, center, Q, G, start, radius, color, amb, ks, kn, o1, o2, style, objects);
                         break;
-//                    case 5:
-//                        addPolygonO(type, vertices, cantVertex, color, amb, ks, kn, o1, o2, style, imag);
-//                        break;
+                    case 5:
+                        objects = addPolygonO(type, vertices, cantVertex, color, amb, ks, kn, o1, o2, style, imag, objects);
+                        break;
 //                    case 7:
 //                        addQuadricO(type, matriz, color, amb, ks, kn, o1, o2, cantCortes, vertices, nCorte);
 //                        break;
@@ -314,9 +317,9 @@ settings* readSettingsFromFile(char *fileName) {
     return sceneSettings;
 }
 
-rgb* getTexel(long double u, long double v, int d, int h, objectNode *object){
+rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
     FILE *fptr;
-    rgb* texel = (rgb*) malloc(sizeof(rgb));
+    rgb texel = {0, 0, 0};
     int height, width, calc;
     if ((fptr = fopen(object->textureFile,"r")) != NULL){
         fread(&width,sizeof(int),1,fptr);
@@ -325,22 +328,22 @@ rgb* getTexel(long double u, long double v, int d, int h, objectNode *object){
         fread(&height,sizeof(int),1,fptr);
         height = FIX(height);
         if(object->texture == 1){
-            u = (long double) (d%width)/width;
-            v = (long double) (h%height)/height;
+            v = (long double) (d%width)/width;
+            u = (long double) (h%height)/height;
         }
 
-        u =  u*width;
-        v =  v*height;
+        u =  u*height;
+        v =  v*width;
 
         calc = (int) (v*width+u);//Calculo del pixel que se desea
         fseek(fptr, 4L*calc, SEEK_CUR);
 
         fgetc(fptr);//alpha
-        texel->r =(double)fgetc(fptr)/255;
-        texel->g =(double)fgetc(fptr)/255;
-        texel->b =(double)fgetc(fptr)/255;
+        texel.r =(double)fgetc(fptr)/255;
+        texel.g =(double)fgetc(fptr)/255;
+        texel.b =(double)fgetc(fptr)/255;
     } else{
-        printf("No se encontro el archivo de imagen %c\n",object->textureFile[0]);
+        printf("No se encontro el archivo de imagen %s\n",object->textureFile);
     }
     fclose(fptr);
     return texel;

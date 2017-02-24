@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "sphere.h"
+#include "polygon.h"
 
-sphere* createSphere(long double center[], long double radius/*, int cantCortes, plane* cortes*/){
+sphere* createSphere(long double center[], long double radius, int cantCortes, plane* cortes) {
     sphere *newSphere = (sphere *)malloc(sizeof(sphere));
     vector centerS = {0, 0, 0};
 
@@ -12,19 +13,21 @@ sphere* createSphere(long double center[], long double radius/*, int cantCortes,
     newSphere->center = centerS;
     newSphere->radius = radius;
     newSphere->radius2 = radius * radius;
-    //newSphere->cantCortes = cantCortes;
-    //newSphere->cortes = cortes;
+    newSphere->cantCortes = cantCortes;
+    newSphere->cortes = cortes;
 
     return newSphere;
 }
 
 void freeSphere(struct object *this){
-    sphere *thisSphere = (sphere *) this;
+    sphere *thisSphere = (sphere *) this->info;
+    if(thisSphere->cantCortes > 0){
+        free(thisSphere->cortes);
+    }
     free(thisSphere);
 }
 
 intersectionNode getIntersectionSphere(vector dir, vector anchor, struct object *this){
-    int cortes;
     long double Xc, Yc, Zc, Xa, Ya, Za, Xd, Yd, Zd, r2;
     intersectionNode intersection = {0, NULL, NULL};
     sphere* object = (sphere *) this->info;
@@ -63,15 +66,16 @@ intersectionNode getIntersectionSphere(vector dir, vector anchor, struct object 
             intersection.t = t2;
         }
     }
-    //if(intersection != NULL && this->cantCortes > 0) {
-    //    for(cortes = 0; cortes < this->cantCortes; cortes++) {
-    //        t = calcIntersecPlane0(dir, anchor, this->cortes[corte]) {
-    //            if(t != NULL && t2-t[3] < DELTA) {
-    //                intersection->t = t1;
-    //            }
-    //        }
-    //    }
-    //}
+    if(intersection.object != NULL && object->cantCortes > 0) {
+        for(int contador = 0; contador < object->cantCortes; contador++){
+            long double *t = calcIntersecPlane0(dir,anchor,object->cortes[contador]);
+            if(t != NULL){
+                if(t2-t[3] < DELTA){
+                    intersection.t = t1;
+                }
+            }
+        }
+    }
     return intersection;
 }
 
@@ -100,16 +104,19 @@ vector getNormalSphere(vector eye, vector dir, long double t, objectNode *this){
 objectNode* addSphereO(int type, long double center[], long double radius, long double color[], long double amb, long double ks,
                 int kn, long double o1, long double o2, int cantCortes, vector* cortes, vector* nCortes, objectNode *objects){
     objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    plane *planosCorte = NULL;
 
     rgb newColor = {0, 0, 0};
     sphere *newSphere;
-    //plane* planosCorte;
 
     createObject(newObject, newColor, type, color, amb, ks, kn, o1, o2);
 
-    //planosCorte = calcPlanosDeCorte(cantCortes, cortes, nCortes);
+    if(cantCortes > 0){
+        planosCorte = calcPlanosDeCorte(cantCortes, cortes, nCortes);
+    }
 
-    newSphere = createSphere(center, radius);
+
+    newSphere = createSphere(center, radius, cantCortes, planosCorte);
     newObject->info = (void *) newSphere;
     newObject->getNormal = &getNormalSphere;
     newObject->getIntersection = &getIntersectionSphere;

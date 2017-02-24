@@ -7,18 +7,18 @@
 
 typedef struct sphere{
 	vector center;
-	//plane* cortes;
+	plane *cortes;
 	long double radius;
 	long double radius2;
-	//int cantCortes;
+	int cantCortes;
 } sphere;
 
 
 objectNode* addSphereO(int type, long double center[], long double radius, long double color[], long double amb, long double ks,
                         int kn, long double o1, long double o2, int cantCortes, vector* cortes, vector* nCortes, objectNode *objects);
-sphere* createSphere(long double center[], long double radius/*, int cantCortes, plane* cortes*/);
+sphere* createSphere(long double center[], long double radius, int cantCortes, plane* cortes);
 void freeSphere(struct object *this);
-intersectionNode* getIntersection(vector dir, vector anchor, objectNode *this);
-vector* getNormal(vector eye, vector dir, long double t, objectNode *this);
+intersectionNode getIntersectionSphere(vector dir, vector anchor, objectNode *this);
+vector getNormalSphere(vector eye, vector dir, long double t, objectNode *this);
 
 #endif /* SPHERE_H_ */

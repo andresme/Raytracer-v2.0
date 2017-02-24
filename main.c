@@ -89,6 +89,7 @@ int main (int argc, char **argv) {
     while(current != NULL) {
         objectNode *temp = current;
         current = current->next;
+        temp->deleteObject(temp);
         free(temp);
     }
     lightNode *currentL = lights;

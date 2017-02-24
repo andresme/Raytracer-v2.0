@@ -27,8 +27,7 @@ typedef struct object {
     struct object *next;
 } objectNode;
 
-
 objectNode * addObject(objectNode *newObject, objectNode *objects);
 void createObject(objectNode *newObject, rgb newColor, int type, long double color[], long double amb, long double ks, int kn, long double o1, long double o2);
-
+plane* calcPlanosDeCorte(int cantVec, vector* puntos, vector* normales);
 #endif

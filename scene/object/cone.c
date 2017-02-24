@@ -191,7 +191,7 @@ intersectionNode getIntersectionCone(vector dir, vector anchor, objectNode *obje
 }
 
 void freeCone(struct object *this) {
-    cone *thisCone = (cone *) this;
+    cone *thisCone = (cone *) this->info;
     free(thisCone);
 }
 

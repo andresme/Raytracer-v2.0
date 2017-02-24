@@ -28,3 +28,10 @@ long double productoPunto(vector a, vector b){
     result = a.x*b.x + a.y*b.y + a.z*b.z;
     return result;
 }
+
+long double absld(long double value){
+    if(value < 0) {
+        return -value;
+    }
+    return value;
+}

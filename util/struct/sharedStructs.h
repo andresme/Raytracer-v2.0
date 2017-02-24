@@ -14,7 +14,7 @@ typedef struct rgb {
 } rgb;
 
 typedef struct plane {
-    vector *N;
+    vector N;
     long double A;
     long double B;
     long double C;
