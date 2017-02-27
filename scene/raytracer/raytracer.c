@@ -202,9 +202,9 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
                     R.z = (N.z * 2 * product) - L.z;
                     E = E + (expTo(productoPunto(R,nXd), firstIntersection.object->kn) * factAtt
                              * k->intensity) * firstIntersection.object->ks;
-                    lightsColor.r += k->color.r * min(1, I);
-                    lightsColor.g += k->color.g * min(1, I);
-                    lightsColor.b += k->color.b * min(1, I);
+                    lightsColor.r += k->color.r;
+                    lightsColor.g += k->color.g;
+                    lightsColor.b += k->color.b;
                 }
             }
             lightCount++;

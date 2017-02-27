@@ -1,0 +1,89 @@
+//luz 1
+center:507.0:150.0:100.0
+color:1.0:0.0:0.0
+c:1:0:0
+inten:1.0
+add:
+
+//luz 2
+center:507.0:150.0:1100.0
+color:1.0:0.0:0.0
+c:1:0:0
+inten:1.0
+add:
+
+//luz 3
+center:507.0:150.0:2100.0
+color:0.0:1.0:0.0
+c:1:0:0
+inten:1.0
+add:
+
+//luz 4
+center:507.0:150.0:3100.0
+color:0.0:0.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+//luz 5
+center:507.0:150.0:4100.0
+color:1.0:0.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+//luz 6
+center:507.0:800.0:100.0
+color:0.0:1.0:1.0
+c:1:0:0
+inten:0.6
+add:
+
+//luz 7
+center:507.0:800.0:1100.0
+color:1.0:0.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+//luz 8
+center:507.0:800.0:2100.0
+color:1.0:1.0:0.0
+c:1:0:0
+inten:0.4
+add:
+
+//luz 9
+center:517.0:800.0:3100.0
+color:1.0:1.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+//luz 10
+center:507.0:800.0:4100.0
+color:1.0:0.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+
+//luz general
+center:504.0:350.0:0.0
+color:1.0:1.0:1.0
+c:1:0:0
+inten:0.3
+add:
+
+center:560.0:10.0:0.0
+color:1.0:1.0:1.0
+c:1:0:0
+inten:0.4
+add:
+
+center:560.0:1000.0:0.0
+color:1.0:1.0:1.0
+c:1:0:0
+inten:0.4
+add:

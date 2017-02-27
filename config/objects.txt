@@ -319,7 +319,7 @@ o1:0.6
 o2:0.4
 add:
 
-//Esfera derecha
+
 sphere:
 radius:100
 color:0.78:0.78:0.78
@@ -330,4 +330,15 @@ ks:0.04
 kn:1
 o1:0.6
 o2:0.4
+add:
+
+cylinder:
+center:100:850:1500
+radius:155
+Q:0.3762:0.5787:0.7234
+start:0:300
+color:0.604:0.364:0.950
+amb:0.9
+ks:0.030
+kn:150
 add:
