@@ -46,6 +46,7 @@ textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
     FILE *fptr;
     int height, width;
     if ((fptr = fopen(fileName,"r")) != NULL){
+        printf("Cargando: '%s'\n", fileName);
         fread(&width,sizeof(int),1,fptr);
         width = FIX(width);
 
@@ -69,7 +70,7 @@ textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
         }
         fclose(fptr);
     } else{
-        printf("No se encontro el archivo de imagen %s\n", fileName);
+        printf("No se encontro el archivo de imagen '%s'\n", fileName);
     }
     return texture;
 }
@@ -79,14 +80,14 @@ objectNode* readObjectsFromFile(char *fileName) {
     long double radius,amb,ks,color[3],center[3],Q[3],p[2],start[2], N[3], f1[3], f2[3], radius2, G[3];
     long double matriz[10];
     long double K, o1, o2;
-    char info[40], *attrib, *imag;
+    char info[256], *attrib, *imag;
     int contador = 0,type = 0, kn = 0, cantVertex = 0, cantCortes = 0, style = 0;
 
     FILE* fileptr = fopen(fileName, "rt");
 
     objectNode * objects = NULL;
 
-    while(fgets(info, 40, fileptr) != NULL){ //Leer el archivo completo
+    while(fgets(info, 256, fileptr) != NULL){ //Leer el archivo completo
         if(strlen(info) > 1){ //si el elemento leido no esta vacio
             attrib = strtok(info, ":");
             //Obtener la informacion del archivo
