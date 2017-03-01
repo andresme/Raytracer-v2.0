@@ -11,18 +11,14 @@
 #include "../../scene/object/cylinder.h"
 #include "../../scene/object/polygon.h"
 
-void textureFromFile(char *fileName, textureStruct* texture);
+textureStruct* textureFromFile(char *fileName);
 
 textureStruct *textures = NULL;
 
 void loadTexture(char *fileName) {
     int found = 0;
-    textureStruct* texture = (textureStruct *) malloc(sizeof(texture));
-
-    printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
-    texture->next = NULL;
     if(textures == NULL) {
-        textureFromFile(fileName, texture);
+        textureStruct* texture = textureFromFile(fileName);
         textures = texture;
         texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
         strcpy(texture->name, fileName);
@@ -38,7 +34,7 @@ void loadTexture(char *fileName) {
             temp = temp->next;
         }
         if(!found) {
-            textureFromFile(fileName, texture);
+            textureStruct* texture = textureFromFile(fileName);
             texture->next = textures;
             texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
             strcpy(texture->name, fileName);
@@ -48,7 +44,7 @@ void loadTexture(char *fileName) {
 }
 
 
-void textureFromFile(char *fileName, textureStruct* texture) {
+textureStruct* textureFromFile(char *fileName) {
     FILE *fptr;
     int height, width;
     if ((fptr = fopen(fileName,"r")) != NULL){
@@ -59,8 +55,12 @@ void textureFromFile(char *fileName, textureStruct* texture) {
         fread(&height,sizeof(int),1,fptr);
         height = FIX(height);
 
+        size_t size = strlen(fileName)*sizeof(char) + width*height*sizeof(rgb) + sizeof(textureStruct);
+        textureStruct *texture = (textureStruct *) malloc(size);
+
         texture->width = width;
         texture->height = height;
+        texture->next = NULL;
 
         texture->fileInfo = (rgb *) malloc(width*height*sizeof(rgb));
 
