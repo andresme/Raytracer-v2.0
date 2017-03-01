@@ -20,7 +20,7 @@ void loadTexture(char *fileName) {
     textureStruct* texture = (textureStruct *) malloc(sizeof(texture));
     texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
     strcpy(texture->name, fileName);
-    printf("Texture name: '%s'\n", texture->name);
+    printf("Texture name: '%s':'%s'\n", texture->name, fileName);
     texture->next = NULL;
     if(textures == NULL) {
         textures = textureFromFile(texture->name, texture);
