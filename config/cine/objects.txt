@@ -46,7 +46,6 @@ kn:1
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 //piso
@@ -63,7 +62,6 @@ kn:1
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 //frente
@@ -419,7 +417,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -435,7 +432,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -451,7 +447,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -467,7 +462,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -500,7 +494,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -516,7 +509,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -532,7 +524,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -548,7 +539,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -581,7 +571,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -597,7 +586,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -613,7 +601,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-    texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -629,7 +616,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -662,7 +648,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -678,7 +663,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -694,7 +678,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -710,7 +693,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -744,7 +726,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -760,7 +741,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -776,7 +756,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -792,7 +771,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -825,7 +803,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -841,7 +818,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -857,7 +833,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -906,7 +881,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -922,7 +896,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -938,7 +911,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -954,7 +926,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -1003,7 +974,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -1019,7 +989,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
@@ -1035,7 +1004,6 @@ kn:200
 o1:1.0
 o2:0.0
 style:0
-texFile:./config/t/toy.avs
 add:
 
 polygon:
