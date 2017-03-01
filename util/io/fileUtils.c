@@ -24,6 +24,7 @@ void loadTexture(char *fileName) {
     texture->next = NULL;
     if(textures == NULL) {
         textures = textureFromFile(fileName, texture);
+        printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
     } else {
         textureStruct* temp = textures;
         while(temp != NULL) {
