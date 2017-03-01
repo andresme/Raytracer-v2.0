@@ -23,7 +23,7 @@ void loadTexture(char *fileName) {
     printf("Texture name: '%s':'%s'\n", texture->name, fileName);
     texture->next = NULL;
     if(textures == NULL) {
-        textures = textureFromFile(texture->name, texture);
+        textures = textureFromFile(fileName, texture);
     } else {
         textureStruct* temp = textures;
         while(temp != NULL) {
