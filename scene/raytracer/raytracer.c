@@ -220,9 +220,9 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
         if(firstIntersection.object != NULL && firstIntersection.object->texture > 0){
             color = firstIntersection.object->getTexture(firstIntersection.object->texture, firstIntersection.t,
                                                               a, b, firstIntersection.object);
-            color.r = I * color.r;
-            color.g = I * color.g;
-            color.b = I * color.b;
+            color.r = I * (color.r + lightsColor.r)/2;
+            color.g = I * (color.g + lightsColor.g)/2;
+            color.b = I * (color.b + lightsColor.b)/2;
         }
         else{
             color.r = I * (firstIntersection.object->color.r + lightsColor.r)/2;
@@ -252,6 +252,7 @@ rgb getColor(vector a, vector b, int mirrorLevel) {
             color.b = firstIntersection.object->o1 * color.b +
                 firstIntersection.object->o2 * tempColor.b;
         }
+
         return color;
     }
 }

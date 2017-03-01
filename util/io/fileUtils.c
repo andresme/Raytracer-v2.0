@@ -77,7 +77,7 @@ objectNode* readObjectsFromFile(char *fileName) {
             }
             else if(!strcmp(attrib, "texFile")){
                 attrib = strtok(NULL, ":");
-                imag = (char *) malloc(strlen(attrib)*sizeof(char));
+                imag = (char *) malloc((strlen(attrib)+1)*sizeof(char));
                 strcpy(imag, attrib);
                 imag[strlen(attrib)-1] = '\0';
             }
@@ -327,6 +327,7 @@ rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
 
         fread(&height,sizeof(int),1,fptr);
         height = FIX(height);
+
         if(object->texture == 1){
             v = (long double) (d%width)/width;
             u = (long double) (h%height)/height;
@@ -335,7 +336,7 @@ rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
         u =  u*height;
         v =  v*width;
 
-        calc = (int) (v*width+u);//Calculo del pixel que se desea
+        calc = (int) (u*width+v);//Calculo del pixel que se desea
         fseek(fptr, 4L*calc, SEEK_CUR);
 
         fgetc(fptr);//alpha

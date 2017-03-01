@@ -108,8 +108,5 @@ int main (int argc, char **argv) {
 
     double time_spent = ((double)(end - begin) / CLOCKS_PER_SEC) / threadNumber;
     printf("time raytracing: %lf seconds.\n", time_spent);
-    char *cmd = (char *) malloc((8+strlen(outputFileName)+1)*sizeof(char));
-    sprintf(cmd, "display %s\0", outputFileName);
-    system(cmd);
     return 0;
 }
