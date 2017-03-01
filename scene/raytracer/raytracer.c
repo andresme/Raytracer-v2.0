@@ -16,6 +16,9 @@ long double ia;
 long double *window;
 objectNode *objects;
 lightNode *lights;
+int totalPixels;
+int currentPixels;
+int printValue[100];
 
 rgb** initFrameBuffer(int height, int width);
 void * drawThread(void *data);
@@ -37,6 +40,8 @@ rgb** draw(settings *sceneSettings, objectNode *pObjects, lightNode *pLights, in
     window = sceneSettings->window;
     objects = pObjects;
     lights = pLights;
+
+    totalPixels = height * width;
 
     frameBuffer = initFrameBuffer(height, width);
     pthread_t threads[pThreadNumber];
@@ -101,10 +106,19 @@ void * drawThread(void *data) {
             color.r /= cont2;
             color.g /= cont2;
             color.b /= cont2;
-
             frameBuffer[currentH][currentW].r = color.r;
             frameBuffer[currentH][currentW].g = color.g;
             frameBuffer[currentH][currentW].b = color.b;
+
+
+            pthread_mutex_lock(&frameBufferMutex);
+            currentPixels++;
+            int bucket = (int) (((double)currentPixels / (double)totalPixels) * 100);
+            if(!printValue[bucket]) {
+                printf("Current Progress: %d%% ...\n", bucket);
+                printValue[bucket] = 1;
+            }
+            pthread_mutex_unlock(&frameBufferMutex);
         }
     }
 }

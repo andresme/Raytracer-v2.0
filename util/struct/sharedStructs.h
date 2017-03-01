@@ -37,4 +37,12 @@ typedef struct settings {
     int mirrorLevel;
 } settings;
 
+typedef struct textureStruct {
+    rgb *fileInfo;
+    char* name;
+    int width;
+    int height;
+    struct textureStruct *next;
+} textureStruct;
+
 #endif

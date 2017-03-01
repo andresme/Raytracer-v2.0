@@ -11,6 +11,68 @@
 #include "../../scene/object/cylinder.h"
 #include "../../scene/object/polygon.h"
 
+textureStruct* textureFromFile(char *fileName, textureStruct* texture);
+
+textureStruct *textures = NULL;
+
+void loadTexture(char *fileName) {
+    int found = 0;
+    textureStruct* texture = (textureStruct *) malloc(sizeof(texture));
+    texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
+    texture->name = strcpy(texture->name, fileName);
+    texture->name[strlen(fileName)] = '\0';
+    texture->next = NULL;
+    if(textures == NULL) {
+        textures = textureFromFile(texture->name, texture);
+    } else {
+        textureStruct* temp = textures;
+        while(temp != NULL) {
+            if(strcmp(fileName, temp->name) == 0) {
+                found = 1;
+                break;
+            }
+            temp = temp->next;
+        }
+        if(!found) {
+            texture = textureFromFile(fileName, texture);
+            texture->next = textures;
+            textures = texture;
+        }
+    }
+}
+
+
+textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
+    FILE *fptr;
+    int height, width;
+    if ((fptr = fopen(fileName,"r")) != NULL){
+        fread(&width,sizeof(int),1,fptr);
+        width = FIX(width);
+
+        fread(&height,sizeof(int),1,fptr);
+        height = FIX(height);
+
+        texture->width = width;
+        texture->height = height;
+
+        texture->fileInfo = (rgb *) malloc(width*height*sizeof(rgb));
+
+        for(int i = 0; i < width*height; i++){
+            rgb texel = {0, 0, 0};
+            fgetc(fptr);//alpha
+            texel.r =(double)fgetc(fptr)/255;
+            texel.g =(double)fgetc(fptr)/255;
+            texel.b =(double)fgetc(fptr)/255;
+            texture->fileInfo[i].r = texel.r;
+            texture->fileInfo[i].g = texel.g;
+            texture->fileInfo[i].b = texel.b;
+        }
+        fclose(fptr);
+    } else{
+        printf("No se encontro el archivo de imagen %s\n", fileName);
+    }
+    return texture;
+}
 
 objectNode* readObjectsFromFile(char *fileName) {
     vector *vertices, *nCorte;
@@ -80,6 +142,7 @@ objectNode* readObjectsFromFile(char *fileName) {
                 imag = (char *) malloc((strlen(attrib)+1)*sizeof(char));
                 strcpy(imag, attrib);
                 imag[strlen(attrib)-1] = '\0';
+                loadTexture(imag);
             }
             else if(!strcmp(attrib, "G")){
                 for(contador = 0; contador < 3; contador++){
@@ -320,13 +383,19 @@ settings* readSettingsFromFile(char *fileName) {
 rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
     FILE *fptr;
     rgb texel = {0, 0, 0};
-    int height, width, calc;
-    if ((fptr = fopen(object->textureFile,"r")) != NULL){
-        fread(&width,sizeof(int),1,fptr);
-        width = FIX(width);
+    int height, width, calc, found = 0;
 
-        fread(&height,sizeof(int),1,fptr);
-        height = FIX(height);
+    textureStruct* temp = textures;
+    while(temp != NULL) {
+        if(strcmp(object->textureFile, temp->name) == 0) {
+            found = 1;
+            break;
+        }
+        temp = temp->next;
+    }
+    if(found) {
+        width = temp->width;
+        height = temp->height;
 
         if(object->texture == 1){
             v = (long double) (d%width)/width;
@@ -336,17 +405,12 @@ rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
         u =  u*height;
         v =  v*width;
 
-        calc = (int) (u*width+v);//Calculo del pixel que se desea
-        fseek(fptr, 4L*calc, SEEK_CUR);
+        calc = (int) (u*width+v);
 
-        fgetc(fptr);//alpha
-        texel.r =(double)fgetc(fptr)/255;
-        texel.g =(double)fgetc(fptr)/255;
-        texel.b =(double)fgetc(fptr)/255;
+        texel = temp->fileInfo[calc];
     } else{
         printf("No se encontro el archivo de imagen %s\n",object->textureFile);
     }
-    fclose(fptr);
     return texel;
 }
 
