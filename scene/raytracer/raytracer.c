@@ -46,7 +46,7 @@ rgb** draw(settings *sceneSettings, objectNode *pObjects, lightNode *pLights, in
     frameBuffer = initFrameBuffer(height, width);
     pthread_t threads[pThreadNumber];
     for(int thread = 0; thread < pThreadNumber; thread++) {
-        threadData *data = (threadData *) malloc(sizeof(threadData));
+        threadData *data = malloc(sizeof *data);
         data->threadId = thread;
         data->threadNum = pThreadNumber;
         pthread_create(&threads[thread], NULL, drawThread, (void *) data);
@@ -338,10 +338,10 @@ long double getFactAtt(long double c[], vector p, vector Xi){
 }
 
 rgb** initFrameBuffer(int height, int width) {
-    rgb **frameBuffer = (rgb **) malloc(height * sizeof(rgb*));
+    rgb **frameBuffer = malloc(height * (sizeof *frameBuffer));
 
     for(int currentH = 0; currentH < height; currentH++) {
-        frameBuffer[currentH] = (rgb *) malloc(width * sizeof(rgb));
+        frameBuffer[currentH] = malloc(width * (sizeof *frameBuffer[currentH]));
     }
     return frameBuffer;
 }

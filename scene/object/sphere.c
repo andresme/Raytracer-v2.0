@@ -3,7 +3,7 @@
 #include "polygon.h"
 
 sphere* createSphere(long double center[], long double radius, int cantCortes, plane* cortes) {
-    sphere *newSphere = (sphere *)malloc(sizeof(sphere));
+    sphere *newSphere = malloc(sizeof *newSphere);
     vector centerS = {0, 0, 0};
 
     centerS.y = center[0];
@@ -103,7 +103,7 @@ vector getNormalSphere(vector eye, vector dir, long double t, objectNode *this){
 //Agrega una esfera
 objectNode* addSphereO(int type, long double center[], long double radius, long double color[], long double amb, long double ks,
                 int kn, long double o1, long double o2, int cantCortes, vector* cortes, vector* nCortes, objectNode *objects){
-    objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    objectNode *newObject = malloc(sizeof *newObject);
     plane *planosCorte = NULL;
 
     rgb newColor = {0, 0, 0};

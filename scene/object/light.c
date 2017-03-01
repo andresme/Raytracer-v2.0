@@ -4,7 +4,7 @@
 
 
 lightNode* addLight(long double center[], long double intensity, long double c[], long double color[], lightNode *lights){
-    lightNode *newLight = malloc(sizeof(struct light));
+    lightNode *newLight = malloc(sizeof *newLight);
     vector centerS;
     rgb newColor = {0, 0, 0};
 

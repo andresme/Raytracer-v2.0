@@ -7,7 +7,7 @@
 objectNode* addDiscO(int type, long double center[], long double N[], long double r, long double r2, long double color[],
                      long double amb, long double ks, int kn, long double o1, long double o2, objectNode *objects){
 
-    objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    objectNode *newObject = malloc(sizeof *newObject);
     rgb newColor = {0, 0, 0};
     disc *newDisc;
 
@@ -22,7 +22,7 @@ objectNode* addDiscO(int type, long double center[], long double N[], long doubl
 }
 
 disc* createDisc(long double center[], long double N[], long double r, long double r2){
-    disc *newDisc = (disc *) malloc(sizeof(disc));
+    disc *newDisc = malloc(sizeof *newDisc);
     vector newCenter = {0, 0, 0};
     vector newNormal = {0, 0, 0};
     long double temp;

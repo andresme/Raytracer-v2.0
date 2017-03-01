@@ -11,40 +11,37 @@
 #include "../../scene/object/cylinder.h"
 #include "../../scene/object/polygon.h"
 
-textureStruct* textureFromFile(char *fileName);
+textureStruct* textureFromFile(char *fileName, textureStruct* texture);
 
 textureStruct *textures = NULL;
 
 void loadTexture(char *fileName) {
     int found = 0;
+    textureStruct* texture = malloc(sizeof *texture);
+    texture->name = malloc((strlen(fileName)+1) * (sizeof texture->name));
+    strcpy(texture->name, fileName);
+    texture->next = NULL;
     if(textures == NULL) {
-        textureStruct* texture = textureFromFile(fileName);
-        textures = texture;
-        texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
-        strcpy(texture->name, fileName);
-        printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
+        textures = textureFromFile(fileName, texture);
     } else {
         textureStruct* temp = textures;
         while(temp != NULL) {
-            printf("Texture name1: '%s':'%s', %d\n", temp->name, fileName, strcmp(temp->name, fileName));
-            if(!strcmp(fileName, temp->name)) {
+            if(strcmp(fileName, temp->name) == 0) {
                 found = 1;
                 break;
             }
             temp = temp->next;
         }
         if(!found) {
-            textureStruct* texture = textureFromFile(fileName);
+            texture = textureFromFile(fileName, texture);
             texture->next = textures;
-            texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
-            strcpy(texture->name, fileName);
             textures = texture;
         }
     }
 }
 
 
-textureStruct* textureFromFile(char *fileName) {
+textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
     FILE *fptr;
     int height, width;
     if ((fptr = fopen(fileName,"r")) != NULL){
@@ -55,14 +52,10 @@ textureStruct* textureFromFile(char *fileName) {
         fread(&height,sizeof(int),1,fptr);
         height = FIX(height);
 
-        size_t size = strlen(fileName)*sizeof(char) + width*height*sizeof(rgb) + sizeof(textureStruct);
-        textureStruct *texture = (textureStruct *) malloc(size);
-
         texture->width = width;
         texture->height = height;
-        texture->next = NULL;
 
-        texture->fileInfo = (rgb *) malloc(width*height*sizeof(rgb));
+        texture->fileInfo =  malloc(width*height*(sizeof *texture->fileInfo));
 
         for(int i = 0; i < width*height; i++){
             rgb texel = {0, 0, 0};
@@ -78,6 +71,7 @@ textureStruct* textureFromFile(char *fileName) {
     } else{
         printf("No se encontro el archivo de imagen '%s'\n", fileName);
     }
+    return texture;
 }
 
 objectNode* readObjectsFromFile(char *fileName) {
@@ -145,7 +139,7 @@ objectNode* readObjectsFromFile(char *fileName) {
             }
             else if(!strcmp(attrib, "texFile")){
                 attrib = strtok(NULL, ":");
-                imag = (char *) malloc((strlen(attrib)+1)*sizeof(char));
+                imag = malloc((strlen(attrib)+1)*(sizeof *imag));
                 strcpy(imag, attrib);
                 imag[strlen(attrib)-1] = '\0';
                 loadTexture(imag);
@@ -215,7 +209,7 @@ objectNode* readObjectsFromFile(char *fileName) {
             else if(!strcmp(attrib,"cantV")){
                 attrib = strtok(NULL, ":");
                 sscanf (attrib, "%d", &cantVertex);
-                vertices = (vector*) malloc(cantVertex*sizeof(vector));
+                vertices = malloc(cantVertex* (sizeof *vertices));
                 contador = 0;
             }
             else if(!strcmp(attrib,"style")){
@@ -239,8 +233,8 @@ objectNode* readObjectsFromFile(char *fileName) {
                     vertices = NULL;
                 }
                 else{
-                    nCorte = (vector*) malloc(cantCortes*sizeof(vector));
-                    vertices = (vector*) malloc(cantCortes*sizeof(vector));
+                    nCorte = malloc(cantCortes*(sizeof *nCorte));
+                    vertices = malloc(cantCortes*(sizeof *vertices));
                 }
                 contador = 0;
             }
@@ -329,9 +323,9 @@ settings* readSettingsFromFile(char *fileName) {
     char info[40], *attrib;
     int contador;
 
-    settings *sceneSettings = (settings *) malloc(sizeof(settings));
-    sceneSettings->background = (rgb *) malloc(sizeof(rgb));
-    sceneSettings->window = (long double *) malloc(4 * sizeof(long double));
+    settings *sceneSettings = malloc(sizeof *sceneSettings);
+    sceneSettings->background = malloc(sizeof *sceneSettings->background);
+    sceneSettings->window = malloc(4 * (sizeof *sceneSettings->window));
 
     FILE* fileptr = fopen(fileName, "rt");
 
@@ -393,7 +387,7 @@ rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
 
     textureStruct* temp = textures;
     while(temp != NULL) {
-        if(!strcmp(object->textureFile, temp->name)) {
+        if(strcmp(object->textureFile, temp->name) == 0) {
             found = 1;
             break;
         }

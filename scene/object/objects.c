@@ -34,7 +34,7 @@ objectNode* addObject(objectNode *newObject, objectNode *objects){
 }
 
 plane* calcPlanosDeCorte(int cantVec, vector* puntos, vector* normales){
-    plane* planoDeCorte = (plane*) malloc(cantVec*sizeof(plane));
+    plane* planoDeCorte =  malloc(cantVec*(sizeof *planoDeCorte));
     int contador;
 
     for(contador = 0; contador < cantVec; contador++)

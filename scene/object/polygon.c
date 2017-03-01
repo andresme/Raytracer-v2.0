@@ -12,7 +12,7 @@ vector getMinimos(int cantVertex, vector *vertices);
 objectNode* addPolygonO(int type, vector* vertices, int cantidad, long double color[], long double amb, long double ks,
                         int kn, long double o1, long double o2, int style, char *imag, objectNode *objects){
 
-    objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    objectNode *newObject = malloc(sizeof *newObject);
     rgb newColor = {0, 0, 0};
     polygon *newPolygon;
 
@@ -24,14 +24,14 @@ objectNode* addPolygonO(int type, vector* vertices, int cantidad, long double co
     newObject->getIntersection = &getIntersectionPolygon;
     newObject->getTexture = &getTexturePolygon;
     newObject->deleteObject = &freePolygon;
-    newObject->textureFile = (char *) malloc((strlen(imag)+1)*sizeof(char));
+    newObject->textureFile = malloc((strlen(imag)+1)*(sizeof *newObject->textureFile));
     strcpy(newObject->textureFile, imag);
 
     return addObject(newObject, objects);
 }
 
 polygon* createPolygon(vector* vertices, int cantidad){
-    polygon *newPolygon = (polygon *) malloc(sizeof(polygon));
+    polygon *newPolygon = malloc(sizeof *newPolygon);
 
     newPolygon->plano = createPlane(vertices);
     newPolygon->cantVertex = cantidad;
@@ -132,7 +132,7 @@ long double* calcIntersecPlane(vector dir, vector eye, plane plano){
     Yi = eye.y + (t * dir.y);
     Zi = eye.z + (t * dir.z);
 
-    intersec = (long double*) malloc(4*sizeof(long double));
+    intersec = malloc(4* (sizeof *intersec));
     intersec[0] = Xi;
     intersec[1] = Yi;
     intersec[2] = Zi;
@@ -168,7 +168,7 @@ long double* calcIntersecPlane0(vector dir, vector anchor, plane plano){
     Yi = anchor.y + (t * dir.y);
     Zi = anchor.z + (t * dir.z);
 
-    intersec = (long double*) malloc(4*sizeof(long double));
+    intersec = malloc(4*(sizeof *intersec));
     intersec[0] = Xi;
     intersec[1] = Yi;
     intersec[2] = Zi;
@@ -177,7 +177,7 @@ long double* calcIntersecPlane0(vector dir, vector anchor, plane plano){
 }
 
 void flatVertex(polygon *newPolygon, int cantidad, vector *vertices){
-    vertex2D *newVertex = (vertex2D *) malloc(cantidad*sizeof(vertex2D));
+    vertex2D *newVertex = malloc(cantidad*(sizeof *newVertex));
     long double a, b, c;
     int i;
     a = absld(newPolygon->plano.N.x);
@@ -395,7 +395,7 @@ vector getMaximos(int cantVertex, vector *vertices){
 
 
 void shapeRectangle(polygon* poli){
-    vector *vertices = (vector*) malloc(4*sizeof(vector));
+    vector *vertices = malloc(4*(sizeof *vertices));
 
     vertices[0] = getMinimos(poli->cantVertex, poli->vertices);
     vertices[2] = getMaximos(poli->cantVertex, poli->vertices);

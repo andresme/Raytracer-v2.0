@@ -5,7 +5,7 @@
 
 objectNode* addCylinderO(int type, long double center[], long double N[],long double G[], long double start[], long double r,
                          long double color[], long double amb, long double ks, int kn, long double o1, long double o2, int style, objectNode *objects){
-    objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    objectNode *newObject = malloc(sizeof *newObject);
     rgb newColor = {0, 0, 0};
     cylinder *newCylinder;
 
@@ -22,7 +22,7 @@ objectNode* addCylinderO(int type, long double center[], long double N[],long do
 }
 
 cylinder* createCylinder(long double center[], long double vectorQ[], long double start[], long double r, long double vectorG[]){
-    cylinder *newCylinder = (cylinder *)malloc(sizeof(cylinder));
+    cylinder *newCylinder = malloc(sizeof *newCylinder);
     vector newCenter = {0, 0, 0};
     vector newVectorQ = {0, 0, 0};
     vector newVectorG = {0, 0, 0};

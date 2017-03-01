@@ -9,7 +9,7 @@
 
 
 cone* createCone(long double center[], long double vectorQ[], long double start[], long double p[]){
-    cone *newCone = (cone *)malloc(sizeof(cone));
+    cone *newCone = malloc(sizeof *newCone);
     vector newCenter = {0, 0, 0};
     vector newVectorQ = {0, 0, 0};
 
@@ -197,7 +197,7 @@ void freeCone(struct object *this) {
 
 objectNode* addConeO(int type, long double center[], long double vectorQ[], long double start[], long double p[], long double color[],
               long double amb, long double ks, int kn, long double o1, long double o2, objectNode *objects){
-    objectNode *newObject = (objectNode *) malloc(sizeof(struct object));
+    objectNode *newObject = malloc(sizeof *newObject);
     rgb newColor = {0, 0, 0};
     cone *newCone;
 
