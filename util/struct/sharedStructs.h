@@ -38,11 +38,11 @@ typedef struct settings {
 } settings;
 
 typedef struct textureStruct {
-    rgb *fileInfo;
-    char* name;
     int width;
     int height;
     struct textureStruct *next;
+    char* name;
+    rgb *fileInfo;
 } textureStruct;
 
 #endif
