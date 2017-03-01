@@ -23,7 +23,8 @@ void loadTexture(char *fileName) {
     printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
     texture->next = NULL;
     if(textures == NULL) {
-        textures = textureFromFile(fileName, texture);
+        textureFromFile(fileName, texture);
+        textures = texture;
         printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
     } else {
         textureStruct* temp = textures;
@@ -36,7 +37,7 @@ void loadTexture(char *fileName) {
             temp = temp->next;
         }
         if(!found) {
-            texture = textureFromFile(fileName, texture);
+            textureFromFile(fileName, texture);
             texture->next = textures;
             textures = texture;
         }
@@ -44,7 +45,7 @@ void loadTexture(char *fileName) {
 }
 
 
-textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
+void textureFromFile(char *fileName, textureStruct* texture) {
     FILE *fptr;
     int height, width;
     if ((fptr = fopen(fileName,"r")) != NULL){
@@ -74,7 +75,6 @@ textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
     } else{
         printf("No se encontro el archivo de imagen '%s'\n", fileName);
     }
-    return texture;
 }
 
 objectNode* readObjectsFromFile(char *fileName) {
