@@ -11,7 +11,7 @@
 #include "../../scene/object/cylinder.h"
 #include "../../scene/object/polygon.h"
 
-textureStruct* textureFromFile(char *fileName, textureStruct* texture);
+void textureFromFile(char *fileName, textureStruct* texture);
 
 textureStruct *textures = NULL;
 
