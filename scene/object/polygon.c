@@ -26,7 +26,6 @@ objectNode* addPolygonO(int type, vector* vertices, int cantidad, long double co
     newObject->deleteObject = &freePolygon;
     newObject->textureFile = (char *) malloc((strlen(imag)+1)*sizeof(char));
     strcpy(newObject->textureFile, imag);
-    newObject->textureFile[strlen(imag)] = '\0';
 
     return addObject(newObject, objects);
 }
