@@ -20,14 +20,14 @@ void loadTexture(char *fileName) {
     textureStruct* texture = (textureStruct *) malloc(sizeof(texture));
     texture->name = (char *) malloc((strlen(fileName)+1)*sizeof(char));
     strcpy(texture->name, fileName);
-    printf("Texture name: '%s':'%s'\n", texture->name, fileName);
+    printf("Texture name: '%s':'%s', %d\n", texture->name, fileName, strcmp(texture->name, fileName));
     texture->next = NULL;
     if(textures == NULL) {
         textures = textureFromFile(fileName, texture);
     } else {
         textureStruct* temp = textures;
         while(temp != NULL) {
-            if(strcmp(fileName, temp->name) == 0) {
+            if(!strcmp(fileName, temp->name)) {
                 found = 1;
                 break;
             }
@@ -388,7 +388,7 @@ rgb getTexel(long double u, long double v, int d, int h, objectNode *object){
 
     textureStruct* temp = textures;
     while(temp != NULL) {
-        if(strcmp(object->textureFile, temp->name) == 0) {
+        if(!strcmp(object->textureFile, temp->name)) {
             found = 1;
             break;
         }
