@@ -41,8 +41,8 @@ typedef struct textureStruct {
     int width;
     int height;
     struct textureStruct *next;
-    char* name;
     rgb *fileInfo;
+    char* name;
 } textureStruct;
 
 #endif
