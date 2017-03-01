@@ -27,6 +27,7 @@ void loadTexture(char *fileName) {
     } else {
         textureStruct* temp = textures;
         while(temp != NULL) {
+            printf("Texture name1: '%s':'%s', %d\n", temp->name, fileName, strcmp(temp->name, fileName));
             if(!strcmp(fileName, temp->name)) {
                 found = 1;
                 break;
