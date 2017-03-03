@@ -24,9 +24,7 @@ long double min(long double a, long double b){
 }
 
 long double productoPunto(vector a, vector b){
-    long double result;
-    result = a.x*b.x + a.y*b.y + a.z*b.z;
-    return result;
+    return a.x*b.x + a.y*b.y + a.z*b.z;
 }
 
 long double absld(long double value){

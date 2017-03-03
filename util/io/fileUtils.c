@@ -75,11 +75,13 @@ textureStruct* textureFromFile(char *fileName, textureStruct* texture) {
 }
 
 objectNode* readObjectsFromFile(char *fileName) {
-    vector *vertices, *nCorte;
-    long double radius,amb,ks,color[3],center[3],Q[3],p[2],start[2], N[3], f1[3], f2[3], radius2, G[3];
-    long double matriz[10];
-    long double K, o1, o2;
-    char info[256], *attrib, *imag;
+    vector *vertices = NULL, *nCorte = NULL;
+    long double radius = 0,amb = 0,ks = 0,color[3] = {0, 0, 0}, center[3] = {0, 0, 0},
+            Q[3] = {0, 0, 0}, p[2] = {0, 0}, start[2] = {0, 0},
+            N[3] = {0, 0, 0}, f1[3] = {0, 0, 0}, f2[3] = {0, 0, 0}, radius2 = 0, G[3] = {0, 0, 0};
+    long double matriz[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    long double K = 0, o1 = 0, o2 = 0;
+    char info[256], *attrib = "", *imag = "";
     int contador = 0,type = 0, kn = 0, cantVertex = 0, cantCortes = 0, style = 0;
 
     FILE* fileptr = fopen(fileName, "rt");

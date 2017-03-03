@@ -121,6 +121,7 @@ objectNode* addSphereO(int type, long double center[], long double radius, long 
     newObject->getNormal = &getNormalSphere;
     newObject->getIntersection = &getIntersectionSphere;
     newObject->deleteObject = &freeSphere;
+    newObject->texture = 0;
 
     return addObject(newObject, objects);
 

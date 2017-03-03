@@ -13,58 +13,58 @@ add:
 
 
 //luz 1
-center:507.0:150.0:170.0
-color:0.12:0.20:0.90
+center:517.0:150.0:170.0
+color:1.0:1.0:0.20
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 2
-center:507.0:150.0:545.0
-color:0.48:0.51:0.14
+center:517.0:150.0:545.0
+color:1.0:0.35:0.35
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 3
-center:507.0:150.0:920.0
-color:0.38:0.94:0.85
+center:517.0:150.0:920.0
+color:0.36:1.0:0.36
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 4
-center:507.0:150.0:1295.0
-color:0.18:0.55:0.48
+center:517.0:150.0:1295.0
+color:0.63:0.26:1.0
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 5
-center:507.0:858.0:170.0
-color:0.64:0.57:0.98
+center:517.0:858.0:170.0
+color:1.0:1.0:0.20
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 6
-center:507.0:858.0:545.0
-color:0.97:0.74:0.06
+center:517.0:858.0:545.0
+color:1.0:0.35:0.35
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 7
-center:507.0:858.0:920.0
-color:0.24:0.76:0.24
+center:517.0:858.0:920.0
+color:0.36:1.0:0.36
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 
 //luz 8
 center:517.0:858.0:1295.0
-color:0.29:0.23:0.16
+color:0.63:0.26:1.0
 c:1:0:0
-inten:0.6
+inten:0.8
 add:
 

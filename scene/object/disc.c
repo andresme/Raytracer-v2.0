@@ -18,6 +18,7 @@ objectNode* addDiscO(int type, long double center[], long double N[], long doubl
     newObject->getNormal = &getNormalDisc;
     newObject->getIntersection = &getIntersectionDisc;
     newObject->deleteObject = &freeDisc;
+    newObject->texture = 0;
     return addObject(newObject, objects);
 }
 

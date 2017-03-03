@@ -40,9 +40,9 @@ typedef struct settings {
 typedef struct textureStruct {
     int width;
     int height;
-    struct textureStruct *next;
     rgb *fileInfo;
     char* name;
+    struct textureStruct *next;
 } textureStruct;
 
 #endif
