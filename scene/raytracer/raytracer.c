@@ -137,7 +137,7 @@ int isDifferentColor(rgb colorTemp, int cont, rgb actual) {
         dr = sqrt((double) pow2(r - r1));
         dg = sqrt((double) pow2(g - g1));
         db = sqrt((double) pow2(b - b1));
-        if(dr > DELTA || dg > DELTA || db > DELTA){
+        if(dr > DELTA_COLOR || dg > DELTA_COLOR || db > DELTA_COLOR){
             return 1;
         }
     }
