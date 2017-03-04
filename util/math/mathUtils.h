@@ -5,7 +5,7 @@
 
 #define DELTA 0.00005
 
-#define DELTA_COLOR 0.01
+#define DELTA_COLOR 0.05
 
 #define SWAP(x) ( ((x) << 24) | \
          (((x) << 8) & 0x00ff0000) | \

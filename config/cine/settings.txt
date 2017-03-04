@@ -1,8 +1,8 @@
 eye:283.5:504.0:-1500.0
 window:0:567:0:1008
-height:1701
-width:3024
+height:567
+width:1008
 Ia:0.6
 background:1:1:1
-anti:40
-mirror:4
+anti:10
+mirror:3
