@@ -4,5 +4,5 @@ height:567
 width:1008
 Ia:0.6
 background:1:1:1
-anti:10
+anti:50
 mirror:3
